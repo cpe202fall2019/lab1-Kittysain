@@ -45,13 +45,20 @@ class TestLab1(unittest.TestCase):
     def test_bin_search(self):
         list_val = [0, 1, 2, 3, 4, 7, 8, 9, 10]
         low = 0
-        high = len(list_val) - 1
         self.assertEqual(bin_search(4, 0, len(list_val) - 1, list_val), 4)
         self.assertEqual(bin_search(3, 0, len(list_val) - 1, list_val), 3)
 
+        # test when the list has an odd number of items
+        list_val2 = [20, 22, 24, 36, 102, 188, 200]
+        self.assertEqual(bin_search(20, 0, len(list_val2) - 1, list_val2), 0)
+        self.assertEqual(bin_search(102, 0, len(list_val2) - 1, list_val2), 4)
+        self.assertEqual(bin_search(188, 0, len(list_val2) - 1, list_val2), 5)
+        self.assertEqual(bin_search(200, 0, len(list_val2) - 1, list_val2), 6)
+
         # test when target is not in the list
-        self.assertEqual(bin_search(-1, low, high, list_val), None)
-        self.assertEqual(bin_search(20, low, high, list_val), None)
+        self.assertEqual(bin_search(-1, low, len(list_val) - 1, list_val), None)
+        self.assertEqual(bin_search(20, low, len(list_val) - 1, list_val), None)
+        self.assertEqual(bin_search(10, low, len(list_val2) - 1, list_val2), None)
 
         # test when the list is None
         empty_list = None
