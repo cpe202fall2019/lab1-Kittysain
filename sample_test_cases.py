@@ -38,8 +38,13 @@ class TestLab1(unittest.TestCase):
 
 
     def test_reverse_iter(self):
+        # this test if the function can reverse an empty string
         self.assertEqual(sample.reverse_iter(""),"")
+        # this test if the function can reverse a simply string with letters
         self.assertEqual(sample.reverse_iter("abcd"),"dcba")
-            
+        # test the reverse function with a mixed of input
+        self.assertEqual(sample.reverse_iter("123abcd"), "dcba321")
+        self.assertEqual(sample.reverse_iter("123 _abcd"), "dcba_ 321")
+        self.assertEqual(sample.reverse_iter("+ = -"), "- = +")
 if __name__ == '__main__': 
     unittest.main()

@@ -43,6 +43,7 @@ class TestLab1(unittest.TestCase):
         self.assertEqual(reverse_rec([]), [])
 
     def test_bin_search(self):
+        # this test the bin_search with a simple sorted list with an even number of items
         list_val = [0, 1, 2, 3, 4, 7, 8, 9, 10]
         low = 0
         self.assertEqual(bin_search(4, 0, len(list_val) - 1, list_val), 4)
@@ -54,6 +55,9 @@ class TestLab1(unittest.TestCase):
         self.assertEqual(bin_search(102, 0, len(list_val2) - 1, list_val2), 4)
         self.assertEqual(bin_search(188, 0, len(list_val2) - 1, list_val2), 5)
         self.assertEqual(bin_search(200, 0, len(list_val2) - 1, list_val2), 6)
+
+        # test when the list is very long
+        list_val = []
 
         # test when target is not in the list
         self.assertEqual(bin_search(-1, low, len(list_val) - 1, list_val), None)
