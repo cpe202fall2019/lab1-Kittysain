@@ -1,25 +1,63 @@
-aimport unittest
+import unittest
 from lab1 import *
 
- # A few test cases.  Add more!!!
+
+# A few test cases.  Add more!!!
 class TestLab1(unittest.TestCase):
 
     def test_max_list_iter(self):
-        """add description here"""
+        # this test case check when the list is none
         tlist = None
         with self.assertRaises(ValueError):  # used to check for exception
             max_list_iter(tlist)
+        # this test case check when the list is empty with no value
+        self.assertEqual(max_list_iter([]), None)
+
+        # these test cases check when the list has items that are all the same
+        self.assertEqual(max_list_iter([1, 1, 1, 1]), 1)
+
+        # these test cases check when the list contain only 1 maximum number at different positions
+        self.assertEqual(max_list_iter([1, 1, 1, 2]), 2)
+        self.assertEqual(max_list_iter([1, 1, 2, 1]), 2)
+        self.assertEqual(max_list_iter([1, 2, 1, 1]), 2)
+        self.assertEqual(max_list_iter([2, 1, 1, 1]), 2)
+
+        # these test cases check if there are more than 1 maximum number at different positions
+        self.assertEqual(max_list_iter([2, 2, 1, 1]), 2)
+        self.assertEqual(max_list_iter([1, 2, 2, 1]), 2)
+        self.assertEqual(max_list_iter([1, 1, 2, 2]), 2)
+        self.assertEqual(max_list_iter([2, 1, 1, 2]), 2)
+        self.assertEqual(max_list_iter([2, 1, 2, 1]), 2)
 
     def test_reverse_rec(self):
-        self.assertEqual(reverse_rec([1,2,3]),[3,2,1])
+        # check the output when the list is none
+        rev_list = None
+        with self.assertRaises(ValueError):
+            reverse_rec(rev_list)
+        # test the reverse list with different item
+        self.assertEqual(reverse_rec([1, 2, 3]), [3, 2, 1])
+        self.assertEqual(reverse_rec([1, 2, 2, 3, 4, 5]), [5, 4, 3, 2, 2, 1])
+        # test when all of the item in the list is the same
+        self.assertEqual(reverse_rec([1, 1, 1]), [1, 1, 1])
+        # test when there is no item in the list
+        self.assertEqual(reverse_rec([]), [])
 
     def test_bin_search(self):
-        list_val =[0,1,2,3,4,7,8,9,10]
+        list_val = [0, 1, 2, 3, 4, 7, 8, 9, 10]
         low = 0
-        high = len(list_val)-1
-        self.assertEqual(bin_search(4, 0, len(list_val)-1, list_val), 4 )
+        high = len(list_val) - 1
+        self.assertEqual(bin_search(4, 0, len(list_val) - 1, list_val), 4)
+        self.assertEqual(bin_search(3, 0, len(list_val) - 1, list_val), 3)
+
+        # test when target is not in the list
+        self.assertEqual(bin_search(-1, low, high, list_val), None)
+        self.assertEqual(bin_search(20, low, high, list_val), None)
+
+        # test when the list is None
+        empty_list = None
+        with self.assertRaises(ValueError):
+            bin_search(2, 1, 2, empty_list)
+
 
 if __name__ == "__main__":
-        unittest.main()
-
-    
+    unittest.main()
