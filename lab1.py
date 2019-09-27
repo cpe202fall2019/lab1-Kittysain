@@ -35,14 +35,22 @@ def reverse_rec(int_list):
         return last_item + reverse_rec(new_list)
 
 
-def bin_search(target, low, high, int_list, spot=0):
+def bin_search(target, low, high, int_list):
     # searches for target in int_list[low..high] and returns index if found
     # If target is not found returns None. If list is None, raises ValueError
     if int_list is None:
         raise ValueError
-    if len(int_list) == 0 or target < low or target > high:
+    if len(int_list) == 0 or target < int_list[low] or target > int_list[high]:
         return None
-    elif int_list[spot] == target:
-        return spot
-    else:
-        return bin_search(target, low, high, int_list, spot + 1)
+    elif target == int_list[low]:
+        return low
+    elif target == int_list[high]:
+        return high
+
+    mid = (high + low)//2
+    if int_list[mid] == target:
+        return mid
+    elif int_list[mid] < target:
+        return bin_search(target, mid, high, int_list)
+    elif int_list[mid] > target:
+        return bin_search(target, low, mid, int_list)
