@@ -56,18 +56,30 @@ class TestLab1(unittest.TestCase):
         self.assertEqual(bin_search(188, 0, len(list_val2) - 1, list_val2), 5)
         self.assertEqual(bin_search(200, 0, len(list_val2) - 1, list_val2), 6)
 
-        # test when the list is very long
-        list_val = []
-
         # test when target is not in the list
         self.assertEqual(bin_search(-1, low, len(list_val) - 1, list_val), None)
         self.assertEqual(bin_search(20, low, len(list_val) - 1, list_val), None)
+        self.assertEqual(bin_search(7.5, low, len(list_val) - 1, list_val), None)
         self.assertEqual(bin_search(10, low, len(list_val2) - 1, list_val2), None)
 
         # test when the list is None
         empty_list = None
         with self.assertRaises(ValueError):
             bin_search(2, 1, 2, empty_list)
+
+        # test when list has no item
+        list_val3 = []
+        self.assertEqual(bin_search(10,0,len(list_val3)-1, list_val3), None)
+
+        # test when list has 2 items
+        list_val4 = [1, 2]
+        self.assertEqual(bin_search(10, 0, len(list_val4) - 1, list_val4), None)
+        self.assertEqual(bin_search(1, 0, len(list_val4) - 1, list_val4), 0)
+        self.assertEqual(bin_search(2, 0, len(list_val4) - 1, list_val4), 1)
+
+        # test when list has 1 item
+        list_val5 = [1]
+        self.assertEqual(bin_search(1, 0, len(list_val5) - 1, list_val5), 0)
 
 
 if __name__ == "__main__":

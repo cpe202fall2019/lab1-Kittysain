@@ -40,6 +40,8 @@ def bin_search(target, low, high, int_list):
     # If target is not found returns None. If list is None, raises ValueError
     if int_list is None:
         raise ValueError
+    if (target in int_list) is False:
+        return None
     if len(int_list) == 0 or target < int_list[low] or target > int_list[high]:
         return None
     elif target == int_list[low]:
@@ -47,10 +49,9 @@ def bin_search(target, low, high, int_list):
     elif target == int_list[high]:
         return high
 
-    mid = (high + low)//2
-    if int_list[mid] == target:
-        return mid
-    elif int_list[mid] < target:
-        return bin_search(target, mid, high, int_list)
-    elif int_list[mid] > target:
-        return bin_search(target, low, mid, int_list)
+    if int_list[(high + low) // 2] == target:
+        return (high + low) // 2
+    elif int_list[(high + low) // 2] < target < int_list[high]:
+        return bin_search(target, (high + low) // 2, high, int_list)
+    elif int_list[(high + low) // 2] > target > int_list[low]:
+        return bin_search(target, low, (high + low) // 2, int_list)
